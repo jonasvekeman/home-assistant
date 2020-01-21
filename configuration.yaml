@@ -1,10 +1,11 @@
-
-# Configure a default setup of Home Assistant (frontend, api, etc)
-default_config:
-
-# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-# http:
-#   base_url: example.duckdns.org:8123
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  latitude: !secret home_lat
+  longitude: !secret home_long
+  elevation: 25
+  unit_system: metric
+  time_zone: Europe/Brussels
 
 # Text to speech
 tts:
@@ -14,3 +15,12 @@ group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
+
+default_config:
+
+websocket_api:
+
+hacs:
+  token: !secret github_access_token
+
+system_health:
