@@ -43,15 +43,25 @@ plex:
     show_all_controls: true
 
 webostv:
-  host: !secret lg_ip
-  name: Living Room TV
-  standby_connection: true
-  customize:
-    sources:
-      - youtube
-      - netflix
-      - plex
+  - host: !secret lg_ip
+    name: 'LG TV'
+    turn_on_action:
+      service: wake_on_lan.send_magic_packet
+      data:
+        mac: !secret lg_mac
+    customize:
+      sources:
+        - netflix
+        - youtube
+        - plex
+        - hdmi1
+        - hmdi2
+        - hmdi3
+        - hmdi4
+notify:
 
 media_player:
+  - platform: webostv
+    host: !secret lg_ip
+    name: 'LG TV'
 
-notify:
