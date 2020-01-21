@@ -3,9 +3,10 @@ homeassistant:
   name: Home
   latitude: !secret home_lat
   longitude: !secret home_long
-  elevation: 25
+  elevation: !secret elevation
   unit_system: metric
-  time_zone: Europe/Brussels
+  time_zone: !secret time_zone
+  packages: !include_dir_named packages
 
 # Text to speech
 tts:
@@ -17,10 +18,40 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 
 default_config:
-
 websocket_api:
+discovery:
 
 hacs:
   token: !secret github_access_token
 
 system_health:
+
+vacuum:
+  - platform: roomba
+    host: !secret roomba_ip
+    username: !secret roomba_blid
+    password: !secret roomba_password
+
+plex:
+  host: !secret plex_ip
+  port: 32400
+  token: !secret plex_token
+  ssl: false
+  verify_ssl: false
+  media_player:
+    use_episode_art: true
+    show_all_controls: true
+
+webostv:
+  host: !secret lg_ip
+  name: Living Room TV
+  standby_connection: true
+  customize:
+    sources:
+      - youtube
+      - netflix
+      - plex
+
+media_player:
+
+notify:
