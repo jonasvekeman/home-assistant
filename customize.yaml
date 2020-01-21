@@ -1,0 +1,9 @@
+sensor.sensehat_temperature:
+  icon: mdi:thermometer
+  friendly_name: "Temperature"
+sensor.sensehat_humidity:
+  icon: mdi:weather-rainy
+  friendly_name: "Humidity"
+sensor.sensehat_pressure:
+  icon: mdi:gauge
+  friendly_name: "Pressure"

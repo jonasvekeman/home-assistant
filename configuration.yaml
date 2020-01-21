@@ -7,15 +7,16 @@ homeassistant:
   unit_system: metric
   time_zone: !secret time_zone
   packages: !include_dir_named packages
+  customize: !include customize.yaml
 
 # Text to speech
 tts:
   - platform: google_translate
 
-group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
+group: !include groups.yaml
 
 default_config:
 websocket_api:
@@ -65,3 +66,36 @@ media_player:
     host: !secret lg_ip
     name: 'LG TV'
 
+sensor:
+  - platform: sensehat
+    display_options:
+        - temperature
+        - humidity
+        - pressure
+
+  - platform: template
+    sensors:
+      sensehat_temperature:
+        value_template: "{{ states('sensor.temperature') | round(1) }}"
+        unit_of_measurement: '°C'
+      sensehat_pressure:
+        value_template: "{{ states('sensor.pressure') | round(1) }}"
+        unit_of_measurement: 'hPa'
+      sensehat_humidity:
+        value_template: "{{ states('sensor.humidity') | round(1) }}"
+        unit_of_measurement: '%'
+
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /
+      - type: memory_use_percent
+      - type: swap_use_percent
+      - type: load_15m
+      - type: network_in
+        arg: wlan0
+      - type: network_out
+        arg: wlan0
+      - type: ipv4_address
+      - type: processor_use
+      - type: last_boot
