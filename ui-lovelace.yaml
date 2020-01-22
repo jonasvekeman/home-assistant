@@ -1,0 +1,8 @@
+title: Home
+resources:
+  - url: /local/button-card.js
+    type: js
+  - url: /local/bignumber-card.js
+    type: js
+  - url: /local/vertical-style-card.js?v=0.1
+    type: js
