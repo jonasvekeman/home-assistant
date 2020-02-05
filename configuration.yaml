@@ -18,9 +18,17 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 group: !include groups.yaml
 
+lovelace:
+  mode: yaml
+
 default_config:
 websocket_api:
+config:
 discovery:
+
+zwave:
+  usb_path: /dev/ttyACM0
+  network_key: !secret zwave_network_key
 
 hacs:
   token: !secret github_access_token
@@ -32,6 +40,9 @@ vacuum:
     host: !secret roomba_ip
     username: !secret roomba_blid
     password: !secret roomba_password
+
+ios:
+
 
 plex:
   host: !secret plex_ip
