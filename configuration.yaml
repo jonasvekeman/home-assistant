@@ -70,7 +70,6 @@ webostv:
         - hmdi2
         - hmdi3
         - hmdi4
-notify:
 
 media_player:
   - platform: webostv
@@ -110,3 +109,14 @@ sensor:
       - type: ipv4_address
       - type: processor_use
       - type: last_boot
+
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_api
+    allowed_chat_ids:
+     - !secret telegram_id
+
+notify:
+  - name: TelegramNotifier
+    platform: telegram
+    chat_id: !secret telegram_id
